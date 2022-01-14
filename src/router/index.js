@@ -1,6 +1,7 @@
 import { createBrowserHistory } from 'history';
 import { Suspense } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import { ErrorModal } from '../components/ErrorModal/ErrorModal';
 import { publicRoutes } from './routes';
 
 export const history = createBrowserHistory();
@@ -19,7 +20,7 @@ export const MainRouter = () => {
             />
           ))}
         </Switch>
-        {/* <ErrorModal /> */}
+        <ErrorModal />
       </Suspense>
     </Router>
   );

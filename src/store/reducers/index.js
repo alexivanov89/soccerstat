@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-// import { errorReducer } from './errorReducer';
+import { competitionsReducer } from './competitionsReducer';
+import { errorReducer } from './errorReducer';
 
 export const rootReducer = combineReducers({
-  // error: errorReducer,
+  error: errorReducer,
+  competitions: competitionsReducer,
 });
