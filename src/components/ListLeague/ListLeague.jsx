@@ -17,11 +17,13 @@ import {
   TableHead,
   TableRow,
   TextField,
+  Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, NavLink } from 'react-router-dom';
+import { routesPath } from '../../router/routes';
 import { fetchCompetitionsAsync } from '../../store/reducers/competitionsReducer';
 
 const useStyles = makeStyles((theme) => ({
@@ -131,13 +133,18 @@ const ListLeague = () => {
               <TableRow>
                 <TableCell>Название лиги</TableCell>
                 <TableCell>Страна</TableCell>
+                <TableCell>Календарь лиги</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {options?.map((item) => (
                 <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell>
-                    <ListItem key={item.id} component={NavLink} to={`/leagueCalendar/${item.id}`}>
+                    <ListItem
+                      key={item.id}
+                      component={NavLink}
+                      to={{ pathname: routesPath.listOfTeams, state: { id: `${item.id}` } }}
+                    >
                       {item.name}
                     </ListItem>
                   </TableCell>
@@ -148,6 +155,18 @@ const ListLeague = () => {
                         <img src={item.area.ensignUrl} loading="lazy" />
                       </ImageListItem>
                     </ImageList>
+                  </TableCell>
+                  <TableCell>
+                    <ListItem
+                      key={item.id}
+                      component={NavLink}
+                      to={{ pathname: routesPath.leagueCalendar, state: { id: `${item.id}` } }}
+                      sx={{ pl: 0 }}
+                    >
+                      <Typography variant="subtitle1" color="initial">
+                        Календарь {item.name}
+                      </Typography>
+                    </ListItem>
                   </TableCell>
                 </TableRow>
               ))}

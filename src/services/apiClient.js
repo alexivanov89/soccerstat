@@ -14,9 +14,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (error.response.status >= 200 && error.response.status < 300)
+    if (error.response.status >= 200 && error.response.status < 300) {
       store.dispatch(SetError(error.message));
-    else {
+    } else if (error.response.status > 400) {
+      store.dispatch(SetError('Ошибка. Запрос данных не был успешен.'));
+    } else {
       return Promise.reject(error);
     }
   },

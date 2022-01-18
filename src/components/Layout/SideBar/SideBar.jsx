@@ -13,6 +13,7 @@ import { alpha, styled, useTheme } from '@mui/material/styles';
 import { sideBarWidth } from '../../../constants/layout';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { publicRoutes } from '../../../router/routes';
 
 export const SideBarHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -21,13 +22,6 @@ export const SideBarHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
-
-const sideBarConfig = [
-  { text: 'Список лиг/соревнований', path: '/' },
-  { text: 'Список команд', path: '/listOfCommands' },
-  { text: 'Календарь лиги', path: '/leagueCalendar' },
-  { text: 'Календарь команды', path: '/teamCalendar' },
-];
 
 export const SideBar = ({ open, onClick }) => {
   const theme = useTheme();
@@ -61,16 +55,16 @@ export const SideBar = ({ open, onClick }) => {
       <Divider />
       <Box onClick={onClick} onKeyDown={onClick}>
         <List>
-          {sideBarConfig.map(({ text, path }) => (
+          {publicRoutes.map(({ label, path }) => (
             <ListItem
               component={NavLink}
               to={path}
-              key={text}
+              key={label}
               sx={{
                 ...(pathname === path && activeLinkStyle),
               }}
             >
-              <ListItemText primary={text} />
+              <ListItemText primary={label} />
             </ListItem>
           ))}
         </List>

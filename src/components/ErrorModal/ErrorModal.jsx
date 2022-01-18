@@ -35,7 +35,7 @@ export const ErrorModal = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const error = useSelector(({ error }) => error.value);
+  const error = useSelector(({ error }) => error);
 
   const handleClose = () => {
     dispatch(SetError(''));
@@ -43,7 +43,7 @@ export const ErrorModal = () => {
 
   return (
     <Dialog
-      open={Boolean(error)}
+      open={Boolean(error.value)}
       onClose={handleClose}
       scroll="paper"
       className={classes.dialog}
@@ -58,7 +58,7 @@ export const ErrorModal = () => {
           <CloseIcon fontSize="small"></CloseIcon>
         </IconButton>
       </div>
-      <DialogContent className={classes.dialogContentBlock}>{error}</DialogContent>
+      <DialogContent className={classes.dialogContentBlock}>{error.value}</DialogContent>
     </Dialog>
   );
 };

@@ -1,13 +1,13 @@
 import { ErrorAction } from '../actions/creator/error';
 
 const initialState = {
-  error: '',
+  value: '',
 };
 
 export const errorReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ErrorAction.SET_ERROR:
-      return { ...state, error: payload };
+      return { ...state, value: payload };
     default:
       return state;
   }

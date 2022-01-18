@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Box, Card, CardHeader, Grid, List, Typography } from '@mui/material';
+import { Box, Card, CardHeader, CircularProgress, Grid, List, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodayMatchesAsync } from '../../store/reducers/todayMatchesReducer';
 import s from './index.module.scss';
@@ -18,8 +18,10 @@ const ListMatches = () => {
       <CardHeader sx={{ p: 1, pb: 0 }} title="Список сегодняшних матчей" />
       <Box sx={{ p: 1 }}>
         <List className={s.list}>
-          <Grid container rowSpacing={1}>
-            {!loading && matches?.matches?.length !== 0 ? (
+          <Grid container rowSpacing={1} sx={{ minHeight: 96, alignItems: 'center' }}>
+            {loading && <CircularProgress color="primary" />}
+            {!loading &&
+              matches?.matches?.length !== 0 &&
               matches?.matches?.map((match) => (
                 <Grid item xs={12} sm={6} lg={4} key={match.id}>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', fontSize: '0.75rem' }}>
@@ -34,8 +36,8 @@ const ListMatches = () => {
                     </Typography>
                   </Box>
                 </Grid>
-              ))
-            ) : (
+              ))}
+            {!loading && matches?.matches?.length === 0 && (
               <Typography variant="span" color="initial">
                 Сегодня матчей нет
               </Typography>
