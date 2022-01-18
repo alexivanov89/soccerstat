@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/707.977f44a2.chunk.js","mappings":"yIAMA,UAJuB,WACrB,OAAO","sources":["pages/ListOfCommands/ListOfCommands.js"],"sourcesContent":["import React from 'react';\n\nconst ListOfCommands = () => {\n  return <div>ListOfCommands</div>;\n};\n\nexport default ListOfCommands;\n"],"names":[],"sourceRoot":""}

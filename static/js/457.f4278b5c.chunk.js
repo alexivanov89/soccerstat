@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksoccerstat=self.webpackChunksoccerstat||[]).push([[457],{1457:function(e,c,a){a.r(c);a(2791);var s=a(7571),t=a(184);c.default=function(){var e=(0,s.UO)().id;return(0,t.jsxs)("div",{children:["LeagueCalendar ","".concat(e)]})}}}]);
-//# sourceMappingURL=457.f4278b5c.chunk.js.map
