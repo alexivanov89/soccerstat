@@ -1,7 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const LeagueCalendar = () => {
-  return <div>LeagueCalendar</div>;
+  const { id } = useParams();
+
+  return <div>LeagueCalendar {`${id}`}</div>;
 };
 
 export default LeagueCalendar;

@@ -28,7 +28,7 @@ const Header = ({ open, onClick }) => {
   return (
     <>
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{}}>
+        <Toolbar>
           <IconButton
             size="large"
             edge="start"
@@ -39,12 +39,7 @@ const Header = ({ open, onClick }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
+          <Typography variant="h6" noWrap component="div" sx={{ display: 'block' }}>
             SoccerStat
           </Typography>
         </Toolbar>

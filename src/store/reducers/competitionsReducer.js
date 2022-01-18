@@ -7,7 +7,7 @@ import {
 } from '../actions/creator/competitions';
 
 const initialState = {
-  competitions: [],
+  competitions: null,
   loading: false,
   error: '',
 };
@@ -25,11 +25,13 @@ export const competitionsReducer = (state = initialState, { type, payload }) => 
   }
 };
 
-export const fetchCompetitionsAsync = () => (dispatch) => {
+export const fetchCompetitionsAsync = (id, onSuccess) => (dispatch) => {
   dispatch(FetchCompetitions());
   footballService
-    .getCompetition()
-    // .then((response) => console.log(response))
-    .then((response) => dispatch(FetchCompetitionsSuccess(response.data)))
+    .getCompetition(id)
+    .then((response) => {
+      dispatch(FetchCompetitionsSuccess(response.data));
+      onSuccess?.();
+    })
     .catch((error) => dispatch(FetchCompetitionsError(error.message)));
 };

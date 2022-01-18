@@ -1,6 +1,6 @@
 import { apiClient } from './apiClient';
 
 export const footballService = {
-  getCompetition: () => apiClient().get('/competitions/'),
+  getCompetition: (id = '') => apiClient().get(`/competitions/${id}`),
   getMatches: () => apiClient().get('/matches'),
 };

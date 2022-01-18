@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { green, purple } from '@mui/material/colors';
 
-export const theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: purple[500],
@@ -11,3 +11,5 @@ export const theme = createTheme({
     },
   },
 });
+
+export default responsiveFontSizes(theme);

@@ -8,6 +8,8 @@ import { SideBar, SideBarHeader } from './SideBar/SideBar';
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
+    maxHeight: '100vh',
+    overflow: 'hidden',
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
