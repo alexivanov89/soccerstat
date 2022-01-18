@@ -2,6 +2,7 @@
   "name": "soccerstat",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://alexivanov89.github.io/soccerstat",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -34,7 +35,9 @@
     "lint": "eslint --max-warnings=0 \"./src/**/*\"",
     "lint-fix": "eslint --fix  \"./src/**/*\"",
     "lint-changed": "lint --cache",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +61,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.4",
     "prettier": "^2.5.1",
