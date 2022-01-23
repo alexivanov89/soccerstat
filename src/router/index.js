@@ -6,7 +6,7 @@ import { publicRoutes } from './routes';
 
 export const MainRouter = () => {
   return (
-    <Router>
+    <Router basename="/soccerstat">
       <Suspense fallback={<div>Зазрузка...</div>}>
         <Layout>
           <Switch>
