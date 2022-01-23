@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.5bbebaa4.css","mappings":"AAAA,KAGE,mCACA,yFAEE,CAJF,aADA,QAKE","sources":["index.scss"],"sourcesContent":["body {\n  margin: 0;\n  height: 100vh;\n  background-color: #8a008a !important;\n  background-image: url(\"/assets/img/football-no-lines.png\");\n  a:-webkit-any-link:active {\n    color: #9c27b0;\n  }\n}\n"],"names":[],"sourceRoot":""}
