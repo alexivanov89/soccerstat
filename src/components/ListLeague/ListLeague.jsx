@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation, NavLink } from 'react-router-dom';
+import { routesPath } from '../../router/routes';
+import { fetchCompetitionsAsync } from '../../store/reducers/competitionsReducer';
 import {
   Autocomplete,
   Box,
@@ -20,15 +25,10 @@ import {
   Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation, NavLink } from 'react-router-dom';
-import { routesPath } from '../../router/routes';
-import { fetchCompetitionsAsync } from '../../store/reducers/competitionsReducer';
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
-    maxHeight: 375,
+    maxHeight: '73vh',
     '&::-webkit-scrollbar': {
       width: 16,
       backgroundColor: '#F5F7FA',
@@ -44,16 +44,29 @@ const useStyles = makeStyles((theme) => ({
       border: 'solid 6px transparent',
     },
   },
+  paper: {
+    width: '100%',
+    overflow: 'hidden',
+    maxHeight: 'calc(80vh - 144px)',
+    [theme.breakpoints.down('sm')]: {
+      maxHeight: 'calc(80vh - 224px)',
+    },
+  },
 }));
 
 const ListLeague = () => {
   const dispatch = useDispatch();
   const { competitions } = useSelector(({ competitions }) => competitions);
   const [options, setOptions] = useState([]);
-  const [prepareComp, setprepareComp] = useState([]);
+  const [prepareComp, setPrepareComp] = useState([]);
   const history = useHistory();
   const location = useLocation();
   const classes = useStyles();
+  console.log(location);
+
+  useEffect(() => {
+    dispatch(fetchCompetitionsAsync());
+  }, []);
 
   useEffect(() => {
     setOptions(
@@ -67,66 +80,60 @@ const ListLeague = () => {
         }
       }),
     );
-    setprepareComp(
-      competitions?.competitions.sort((a, b) => {
-        if (a.name.toLowerCase() < b.name.toLowerCase()) {
-          return -1;
-        } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }),
-    );
+    console.log(options);
   }, [competitions, dispatch]);
 
   useEffect(() => {
-    dispatch(fetchCompetitionsAsync());
-  }, []);
+    if (Boolean(options) && options.length !== 0) {
+      setPrepareComp([...options]);
+      console.log(prepareComp);
+    }
+  }, [options]);
+
+  useEffect(() => {
+    if (location?.state?.id) {
+      setPrepareComp([...options.filter(({ id }) => id === +location?.state?.id)]);
+    }
+    console.log(prepareComp);
+  }, [location?.state?.id]);
 
   const handleChange = (value) => {
-    const searchParams = new URLSearchParams(location?.search);
-    const idParam = searchParams.get('id');
-    console.log(idParam);
-    console.log(prepareComp.id);
-    setprepareComp([...prepareComp.filter(({ id }) => +id === value?.id)]);
-    history.push(`${location.pathname}?id=${value?.id}`);
+    history.push({
+      pathname: routesPath.home,
+      state: { id: value?.id },
+    });
+    // console.log(location?.state?.id);
+    // setPrepareComp([...options.filter(({ id }) => id === +location?.state?.id)]);
+    // console.log(prepareComp);
   };
 
   return (
     <Card sx={{ borderRadius: 4 }}>
-      <Grid container rowSpacing={1}>
-        <Grid item xs={12}>
-          <CardHeader title="Список лиг" subheader="Чемпионаты ведущих стран Европы" />
+      <Grid container rowSpacing={1} sx={{ p: 1 }}>
+        <Grid item xs={12} sm={6}>
+          <CardHeader
+            title="Список лиг"
+            subheader="Чемпионаты ведущих стран Европы"
+            sx={{ p: 0 }}
+          />
         </Grid>
-        {/* <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           {!!options && options?.length !== 0 && (
             <Autocomplete
               disablePortal
               id="combo-box-demo"
               getOptionLabel={(option) => `${option.name}, ${option.area.countryCode}`}
               options={options}
-              sx={{ width: 300 }}
+              sx={{ width: '100%', padding: '0px 5px' }}
               onChange={(e, value) => {
                 handleChange(value);
               }}
               renderInput={(params) => <TextField {...params} label="Найти Чемпионат" />}
             />
           )}
-        </Grid> */}
+        </Grid>
       </Grid>
-
-      {/* <Box sx={{ p: 3 }}>
-        <List sx={{ p: 1, maxHeight: '40vh', overflowY: 'auto' }}>
-          {!competitions?.loading &&
-            competitions?.competitions.map(({ id, name, area }) => (
-              <ListItem key={id} component={NavLink} to={`/leagueCalendar/${id}`}>
-                <ListItemText primary={`${name}, ${area.countryCode}`} />
-              </ListItem>
-            ))}
-        </List>
-      </Box> */}
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper className={classes.paper}>
         <TableContainer className={classes.tableContainer}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -152,7 +159,9 @@ const ListLeague = () => {
                     {item.area.name}
                     <ImageList sx={{ width: 30, height: 30 }} cols={1}>
                       <ImageListItem key={item.area.ensignUrl}>
-                        <img src={item.area.ensignUrl} loading="lazy" />
+                        {Boolean(item.area.ensignUrl) ? (
+                          <img src={item.area.ensignUrl} alt="img_flag" loading="lazy" />
+                        ) : null}
                       </ImageListItem>
                     </ImageList>
                   </TableCell>
