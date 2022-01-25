@@ -8,7 +8,7 @@ const LeagueCalendar = lazy(() => import('../pages/LeagueCalendar/LeagueCalendar
 const TeamCalendar = lazy(() => import('../pages/TeamCalendar/TeamCalendar'));
 
 export const routesPath = {
-  home: '/home',
+  home: '/',
   listOfTeams: '/listOfTeams',
   leagueCalendar: '/leagueCalendar',
   teamCalendar: '/teamCalendar',

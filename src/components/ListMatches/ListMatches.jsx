@@ -1,23 +1,38 @@
-import { useEffect } from 'react';
 import { Box, Card, CardHeader, CircularProgress, Grid, List, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodayMatchesAsync } from '../../store/reducers/todayMatchesReducer';
-import s from './index.module.scss';
+import { makeStyles } from '@mui/styles';
 
-const ListMatches = () => {
-  const todayMatches = useSelector(({ todayMatches }) => todayMatches);
+const useStyles = makeStyles((theme) => ({
+  list: {
+    padding: 5,
+    maxHeight: 60,
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    '&::-webkit-scrollbar': {
+      width: 16,
+      backgroundColor: '#F5F7FA',
+    },
+    '&::-webkit-scrollbar-track': {
+      borderRadius: 4,
+      boxShadow: 'inset 0 0 16px 16px rgba(13, 26, 51, 0.05)',
+      border: 'solid 6px transparent',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: 12,
+      boxShadow: 'inset 0 0 16px 16px rgba(13, 26, 51, 0.2)',
+      border: 'solid 6px transparent',
+    },
+  },
+}));
+
+const ListMatches = ({ todayMatches }) => {
   const { matches, loading } = todayMatches;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchTodayMatchesAsync());
-  }, []);
+  const classes = useStyles();
 
   return (
     <Card sx={{ borderRadius: 4, mb: 2, maxHeight: '20vh' }}>
       <CardHeader sx={{ p: 1, pb: 0 }} title="Список сегодняшних матчей" />
       <Box sx={{ p: 1 }}>
-        <List className={s.list}>
+        <List className={classes.list}>
           <Grid container rowSpacing={1} sx={{ overflow: 'auto', alignItems: 'center' }}>
             {loading && <CircularProgress color="primary" />}
             {!loading &&

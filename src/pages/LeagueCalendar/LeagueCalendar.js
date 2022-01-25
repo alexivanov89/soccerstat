@@ -6,14 +6,14 @@ import { fetchMatchesLeagueAsync } from '../../store/reducers/matchesLeagueReduc
 const LeagueCalendar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log(location);
+
   useEffect(() => {
-    if (location?.state) {
-      dispatch(fetchMatchesLeagueAsync(location?.state?.id));
+    if (location.state) {
+      dispatch(fetchMatchesLeagueAsync(location.state.id));
     }
   }, []);
 
-  return <div>LeagueCalendar {`${location?.state?.id}`}</div>;
+  return <div>LeagueCalendar {`${location.state.id}`}</div>;
 };
 
 export default LeagueCalendar;

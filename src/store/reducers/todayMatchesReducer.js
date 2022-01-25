@@ -25,13 +25,12 @@ export const todayMatchesReducer = (state = initialState, { type, payload }) => 
   }
 };
 
-export const fetchTodayMatchesAsync = (id, onSuccess) => (dispatch) => {
+export const fetchTodayMatchesAsync = (id) => (dispatch) => {
   dispatch(FetchTodayMatches());
   footballService
     .getMatches()
     .then((response) => {
       dispatch(FetchTodayMatchesSuccess(response.data));
-      onSuccess?.();
     })
     .catch((error) => dispatch(FetchTodayMatchesError(error.message)));
 };

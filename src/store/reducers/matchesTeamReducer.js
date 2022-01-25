@@ -25,13 +25,12 @@ export const matchesTeamReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const fetchMatchesTeamAsync = (id, onSuccess) => (dispatch) => {
+export const fetchMatchesTeamAsync = (id) => (dispatch) => {
   dispatch(FetchMatchesTeam());
   footballService
     .getMatchesTeam(id)
     .then((response) => {
       dispatch(FetchMatchesTeamSuccess(response.data));
-      onSuccess?.();
     })
     .catch((error) => dispatch(FetchMatchesTeamError(error.message)));
 };
