@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksoccerstat=self.webpackChunksoccerstat||[]).push([[457],{1457:function(e,t,n){n.r(t);var l=n(2791),o=n(6030),s=n(7571),u=n(7407),a=n(184);t.default=function(){var e,t=(0,s.TH)(),n=(0,o.I0)();return console.log(t),(0,l.useEffect)((function(){var e;null!==t&&void 0!==t&&t.state&&n((0,u.o)(null===t||void 0===t||null===(e=t.state)||void 0===e?void 0:e.id))}),[]),(0,a.jsxs)("div",{children:["LeagueCalendar ","".concat(null===t||void 0===t||null===(e=t.state)||void 0===e?void 0:e.id)]})}}}]);
-//# sourceMappingURL=457.e406b223.chunk.js.map
