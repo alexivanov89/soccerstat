@@ -53,8 +53,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 328,
     height: 48,
-    padding: 0,
+    padding: '0px 2px',
     position: 'relative',
+    [theme.breakpoints.down('sm')]: {
+      width: '50%',
+    },
     '&:focus-within': {
       '& input': {
         outline: 'none',
@@ -78,6 +81,11 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 16,
       fontWeight: 700,
       lineHeight: '24px',
+      '&::placeholder': {
+        color: '#989DA6',
+        fontWeight: 500,
+        opacity: 1,
+      },
     },
     '& div.react-datepicker-popper[data-placement^=bottom]': {
       paddingTop: 4,
@@ -238,25 +246,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  footer: {
-    borderRadius: '12px',
-    backgroundColor: '#FFFFFF',
-    boxShadow: '0px 16px 32px -16px rgba(23, 41, 77, 0.12)',
-    border: '1px solid #E1E5ED',
-    padding: '10px 22px',
-    '& .MuiFormControlLabel-root': {
-      marginTop: 10,
-      '& .MuiCheckbox-colorSecondary.Mui-checked': {
-        color: '#0049D9',
-      },
-      '& .MuiCheckbox-colorSecondary.Mui-checked:hover': {
-        backgroundColor: 'rgba(0, 73, 217, 0.04)',
-      },
-      '& .MuiIconButton-colorSecondary:hover': {
-        backgroundColor: 'rgba(0, 73, 217, 0.04)',
-      },
-    },
-  },
 }));
 
 const CalendarsDateRangePicker = () => {
@@ -293,6 +282,7 @@ const CalendarsDateRangePicker = () => {
         dateFormat="LLLL yyyy"
         showMonthYearPicker
         onChangeRaw={handleDateChangeRaw}
+        placeholderText="Выберите фильтр календаря"
       />
     </div>
   );

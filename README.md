@@ -10,3 +10,5 @@
 - Календарь одной команды - список матчей команды
 
 В качестве публичного API для получения данных используется https://www.football-data.org/.
+
+Demo: [Приложение SoccerStat](https://alexivanov89.github.io/soccerstat/)

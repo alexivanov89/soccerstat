@@ -1,11 +1,9 @@
 import { Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { format } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: '100%',
-    overflow: 'hidden',
-  },
+  root: {},
 }));
 
 const ListCalendar = ({ matches }) => {
@@ -30,7 +28,7 @@ const ListCalendar = ({ matches }) => {
                   : `${competition?.name}, ${matchday} тур`}
               </Typography>
               <Typography sx={{ mb: 1.5, textAlign: 'center' }} color="text.secondary">
-                {utcDate}
+                {format(new Date(utcDate), 'MM/dd/yyyy k:m')}
               </Typography>
               <Typography sx={{ mb: 1.5, textAlign: 'center' }} color="text.secondary">
                 {`${homeTeam.name} ${
