@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { competitionsReducer } from './competitionsReducer';
 import { errorReducer } from './errorReducer';
+import { filtersReducer } from './filtersReducer';
 import { matchesLeagueReducer } from './matchesLeagueReducer';
 import { matchesTeamReducer } from './matchesTeamReducer';
 import { teamsLeagueReducer } from './teamsLeagueReducer';
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   matchesLeague: matchesLeagueReducer,
   teamsLeague: teamsLeagueReducer,
   matchesTeam: matchesTeamReducer,
+  filters: filtersReducer,
 });

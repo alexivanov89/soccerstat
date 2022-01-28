@@ -25,10 +25,10 @@ export const matchesTeamReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const fetchMatchesTeamAsync = (id) => (dispatch) => {
+export const fetchMatchesTeamAsync = (id, filters) => (dispatch) => {
   dispatch(FetchMatchesTeam());
   footballService
-    .getMatchesTeam(id)
+    .getMatchesTeam(id, filters)
     .then((response) => {
       dispatch(FetchMatchesTeamSuccess(response.data));
     })

@@ -2,6 +2,9 @@ import { styled } from '@mui/material/styles';
 import { IconButton, AppBar as MuiAppBar, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { sideBarWidth } from '../../../constants/layout';
+import { CalendarsDateRangePicker } from '../../CalendarsDateRangePicker';
+import { useLocation } from 'react-router-dom';
+import { routesPath } from '../../../router/routes';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -25,23 +28,36 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Header = ({ open, onClick }) => {
+  const location = useLocation();
+
   return (
     <>
       <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            onClick={onClick}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ display: 'block' }}>
-            SoccerStat
-          </Typography>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex' }}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+              onClick={onClick}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: 'flex', alignItems: 'center' }}
+            >
+              SoccerStat
+            </Typography>
+          </div>
+          {location.pathname === routesPath.teamCalendar ||
+          location.pathname === routesPath.leagueCalendar ? (
+            <CalendarsDateRangePicker />
+          ) : null}
         </Toolbar>
       </AppBar>
     </>
