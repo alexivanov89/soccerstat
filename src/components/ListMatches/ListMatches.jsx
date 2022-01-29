@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -40,7 +39,7 @@ const ListMatches = ({ todayMatches }) => {
       <Box sx={{ p: 1 }}>
         <List className={classes.list}>
           <Grid container rowSpacing={1} sx={{ overflow: 'auto', alignItems: 'center' }}>
-            {loading && <CircularProgress color="primary" />}
+            {loading && 'Loading...'}
             {!loading &&
               matches?.matches?.length !== 0 &&
               matches?.matches?.map((match) => (

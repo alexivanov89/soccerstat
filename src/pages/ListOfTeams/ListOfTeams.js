@@ -15,14 +15,14 @@ import {
 import { MyAutocomplete } from '../../components/MyAutocomplete';
 import { SetFilterCompetitions } from '../../store/actions/creator/competitions';
 import { routesPath } from '../../router/routes';
-import { ClearTeamsLeague } from '../../store/actions/creator/teamsLeague';
+import { ClearTeamsLeague, SetFilterTeamsLeague } from '../../store/actions/creator/teamsLeague';
 
 const ListOfTeams = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   const teamsLeagueSelected = useSelector(getTeamsLeagueSelector);
-  const { teamsLeague, loading } = useSelector(({ teamsLeague }) => teamsLeague);
+  const { teamsLeague, loading, error } = useSelector(({ teamsLeague }) => teamsLeague);
   const competitions = useSelector(getCompetitionsSelector);
 
   const prepareCompetitions = competitions.sort((a, b) => {
@@ -73,6 +73,13 @@ const ListOfTeams = () => {
     [dispatch],
   );
 
+  const handleChangeListData = useCallback(
+    (value) => {
+      dispatch(SetFilterTeamsLeague(value?.id));
+    },
+    [dispatch],
+  );
+
   const listOptions = {
     title: 'Список команд',
     subheader: `Команды ${teamsLeague?.competition?.name}`,
@@ -92,15 +99,19 @@ const ListOfTeams = () => {
     <>
       {location.state?.id ? (
         <>
-          {loading ? (
-            'loading'
-          ) : (
+          {loading && 'loading'}
+          {!loading && !error && (
             <ListData
               list={prepareTeamsLeague}
               listOptions={listOptions}
-              handleChange={handleChange}
+              handleChange={handleChangeListData}
               maxHeight="calc(95vh - 220px)"
             />
+          )}
+          {error && (
+            <Typography variant="h1" component="h2" color="white" align="center">
+              нет данных
+            </Typography>
           )}
         </>
       ) : (

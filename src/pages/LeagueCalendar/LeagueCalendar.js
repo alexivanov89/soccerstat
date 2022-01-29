@@ -18,7 +18,7 @@ const LeagueCalendar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { matches, loading } = useSelector(({ matchesLeague }) => matchesLeague);
+  const { matches, loading, error } = useSelector(({ matchesLeague }) => matchesLeague);
   const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
   const competitions = useSelector(getCompetitionsSelector);
 
@@ -68,7 +68,15 @@ const LeagueCalendar = () => {
   return (
     <>
       {location.state?.id ? (
-        <>{loading ? 'loading' : <ListCalendar matches={matches} />}</>
+        <>
+          {loading && 'loading'}
+          {!loading && !error && <ListCalendar matches={matches} />}
+          {error && (
+            <Typography variant="h1" component="h2" color="white" align="center">
+              нет данных
+            </Typography>
+          )}
+        </>
       ) : (
         <Card
           sx={{

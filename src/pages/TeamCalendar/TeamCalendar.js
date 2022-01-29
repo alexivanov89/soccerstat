@@ -18,7 +18,7 @@ const TeamCalendar = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { matches, loading } = useSelector(({ matchesTeam }) => matchesTeam);
+  const { matches, loading, error } = useSelector(({ matchesTeam }) => matchesTeam);
   const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
   const teamsLeagueSelected = useSelector(getTeamsLeagueSelector);
 
@@ -68,7 +68,15 @@ const TeamCalendar = () => {
   return (
     <>
       {location.state?.id ? (
-        <>{loading ? 'loading' : <ListCalendar matches={matches} />}</>
+        <>
+          {loading && 'loading'}
+          {!loading && !error && <ListCalendar matches={matches} />}
+          {error && (
+            <Typography variant="h1" component="h2" color="white" align="center">
+              нет данных
+            </Typography>
+          )}
+        </>
       ) : (
         <Card
           sx={{
