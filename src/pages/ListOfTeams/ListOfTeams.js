@@ -54,7 +54,12 @@ const ListOfTeams = () => {
   };
 
   return (
-    <ListData list={prepareTeamsLeague} listOptions={listOptions} handleChange={handleChange} />
+    <ListData
+      list={prepareTeamsLeague}
+      listOptions={listOptions}
+      handleChange={handleChange}
+      maxHeight="calc(100vh - 220px)"
+    />
   );
 };
 

@@ -1,11 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import {
   Autocomplete,
+  Box,
   Card,
   CardHeader,
   Grid,
-  ImageList,
-  ImageListItem,
   ListItem,
   Paper,
   Table,
@@ -21,10 +20,7 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
-    maxHeight: '60vh',
-    [theme.breakpoints.down('sm')]: {
-      maxHeight: '55vh',
-    },
+    padding: '0px 8px 8px 8px',
     '&::-webkit-scrollbar': {
       width: 16,
       backgroundColor: '#F5F7FA',
@@ -43,10 +39,28 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     overflow: 'hidden',
+    padding: '0px 8px 8px 8px',
+  },
+  table: {
+    '& th, td': {
+      padding: 4,
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      tableLayout: 'fixed',
+      '& th, td': {
+        fontSize: '0.65rem',
+      },
+    },
+    '& img': {
+      maxWidth: '20px',
+      maxHeight: '20px',
+      marginRight: '2px',
+    },
   },
 }));
 
-const ListData = ({ list, listOptions, handleChange }) => {
+const ListData = ({ list, listOptions, handleChange, maxHeight }) => {
   const classes = useStyles();
 
   return (
@@ -74,8 +88,8 @@ const ListData = ({ list, listOptions, handleChange }) => {
         </Grid>
       </Grid>
       <Paper className={classes.paper}>
-        <TableContainer className={classes.tableContainer}>
-          <Table stickyHeader aria-label="sticky table">
+        <TableContainer className={classes.tableContainer} sx={{ maxHeight: maxHeight }}>
+          <Table stickyHeader aria-label="sticky table" className={classes.table}>
             <TableHead>
               <TableRow>
                 {listOptions.table.tableColumns.map((item) => (
@@ -94,29 +108,30 @@ const ListData = ({ list, listOptions, handleChange }) => {
                         pathname: listOptions.table.linkPathFirstColummns,
                         state: { id: `${item.id}` },
                       }}
+                      sx={{ padding: '0px !important' }}
                     >
                       {item.name}
                     </ListItem>
                   </TableCell>
                   <TableCell>
-                    {item.area.name}
-                    <ImageList sx={{ width: 30, height: 30 }} cols={1}>
-                      <ImageListItem key={item.area.ensignUrl}>
-                        {
-                          (listOptions.table.imgOption =
-                            'ensignUrl' &&
-                            (Boolean(item.area.ensignUrl) ? (
-                              <img src={item.area.ensignUrl} alt="img" loading="lazy" />
-                            ) : null))
-                        }
-                        {
-                          (listOptions.table.imgOption =
-                            'crestUrl' && Boolean(item.crestUrl) ? (
-                              <img src={item.crestUrl} alt="img" loading="lazy" />
-                            ) : null)
-                        }
-                      </ImageListItem>
-                    </ImageList>
+                    <Box key={item.area.ensignUrl} sx={{ display: 'flex', alignItems: 'center' }}>
+                      {
+                        (listOptions.table.imgOption =
+                          'ensignUrl' &&
+                          (Boolean(item.area.ensignUrl) ? (
+                            <img src={item.area.ensignUrl} alt="img" loading="lazy" />
+                          ) : null))
+                      }
+                      {
+                        (listOptions.table.imgOption =
+                          'crestUrl' && Boolean(item.crestUrl) ? (
+                            <img src={item.crestUrl} alt="img" loading="lazy" />
+                          ) : null)
+                      }
+                      <Typography variant="p" color="initial">
+                        {item.area.name}
+                      </Typography>
+                    </Box>
                   </TableCell>
                   <TableCell>
                     <ListItem
@@ -126,9 +141,9 @@ const ListData = ({ list, listOptions, handleChange }) => {
                         pathname: listOptions.table.linkPathLastColummns,
                         state: { id: `${item.id}` },
                       }}
-                      sx={{ pl: 0 }}
+                      sx={{ padding: '0px !important' }}
                     >
-                      <Typography variant="subtitle1" color="initial">
+                      <Typography variant="p" color="initial">
                         Календарь {item.name}
                       </Typography>
                     </ListItem>

@@ -26,6 +26,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     }),
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
     },
   }),
 );

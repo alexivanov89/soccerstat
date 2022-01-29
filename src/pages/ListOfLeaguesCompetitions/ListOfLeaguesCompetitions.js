@@ -54,7 +54,12 @@ const ListOfLeaguesCompetitions = () => {
   return (
     <>
       <ListMatches todayMatches={todayMatches} />
-      <ListData list={prepareCompetitions} listOptions={listOptions} handleChange={handleChange} />
+      <ListData
+        list={prepareCompetitions}
+        listOptions={listOptions}
+        handleChange={handleChange}
+        maxHeight="calc(100vh - 345px)"
+      />
     </>
   );
 };
