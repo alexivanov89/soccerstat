@@ -15,9 +15,9 @@ const initialState = {
 export const todayMatchesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case todayMatchesActions.FETCH_TODAY_MATCHES:
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: false };
     case todayMatchesActions.FETCH_TODAY_MATCHES_SUCCESS:
-      return { ...state, matches: payload, loading: false };
+      return { ...state, matches: payload, loading: false, error: false };
     case todayMatchesActions.FETCH_TODAY_MATCHES_ERROR:
       return { ...state, error: payload, loading: false };
     default:

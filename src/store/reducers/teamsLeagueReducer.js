@@ -16,9 +16,9 @@ const initialState = {
 export const teamsLeagueReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case teamsLeagueActions.FETCH_TEAMS_LEAGUE:
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: false };
     case teamsLeagueActions.FETCH_TEAMS_LEAGUE_SUCCESS:
-      return { ...state, teamsLeague: payload, loading: false };
+      return { ...state, teamsLeague: payload, loading: false, error: false };
     case teamsLeagueActions.FETCH_TEAMS_LEAGUE_ERROR:
       return { ...state, error: payload, loading: false };
     case teamsLeagueActions.SET_FILTER_TEAMS_LEAGUE:

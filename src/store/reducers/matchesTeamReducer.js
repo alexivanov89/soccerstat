@@ -15,9 +15,9 @@ const initialState = {
 export const matchesTeamReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case matchesTeamActions.FETCH_MATCHES_TEAM:
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: false };
     case matchesTeamActions.FETCH_MATCHES_TEAM_SUCCESS:
-      return { ...state, matches: payload, loading: false };
+      return { ...state, matches: payload, loading: false, error: false };
     case matchesTeamActions.FETCH_MATCHES_TEAM_ERROR:
       return { ...state, error: payload, loading: false };
     case matchesTeamActions.CLEAR_MATCHES_TEAM:
