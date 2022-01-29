@@ -58,7 +58,7 @@ const ListOfTeams = () => {
       list={prepareTeamsLeague}
       listOptions={listOptions}
       handleChange={handleChange}
-      maxHeight="calc(100vh - 220px)"
+      maxHeight="calc(95vh - 220px)"
     />
   );
 };

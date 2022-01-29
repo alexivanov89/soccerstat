@@ -58,7 +58,7 @@ const ListOfLeaguesCompetitions = () => {
         list={prepareCompetitions}
         listOptions={listOptions}
         handleChange={handleChange}
-        maxHeight="calc(100vh - 345px)"
+        maxHeight="calc(95vh - 345px)"
       />
     </>
   );
