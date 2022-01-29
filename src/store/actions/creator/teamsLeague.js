@@ -3,6 +3,7 @@ export const teamsLeagueActions = {
   FETCH_TEAMS_LEAGUE_SUCCESS: 'FETCH_TEAMS_LEAGUE_SUCCESS',
   FETCH_TEAMS_LEAGUE_ERROR: 'FETCH_TEAMS_LEAGUE_ERROR',
   SET_FILTER_TEAMS_LEAGUE: 'SET_FILTER_TEAMS_LEAGUE',
+  CLEAR_TEAMS_LEAGUE: 'CLEAR_TEAMS_LEAGUE',
 };
 
 export const FetchTeamsLeague = () => ({
@@ -22,4 +23,9 @@ export const FetchTeamsLeagueError = (errorMessage) => ({
 export const SetFilterTeamsLeague = (filter) => ({
   type: teamsLeagueActions.SET_FILTER_TEAMS_LEAGUE,
   payload: filter,
+});
+
+export const ClearTeamsLeague = () => ({
+  type: teamsLeagueActions.CLEAR_TEAMS_LEAGUE,
+  payload: null,
 });

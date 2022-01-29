@@ -1,17 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { ListCalendar } from '../../components/ListCalendar';
 import { fetchMatchesLeagueAsync } from '../../store/reducers/matchesLeagueReducer';
+import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import { Card, TextField } from '@mui/material';
+import { MyAutocomplete } from '../../components/MyAutocomplete';
+import {
+  fetchCompetitionsAsync,
+  getCompetitionsSelector,
+} from '../../store/reducers/competitionsReducer';
+import { SetFilterCompetitions } from '../../store/actions/creator/competitions';
+import { routesPath } from '../../router/routes';
+import { ClearMatchesLeague } from '../../store/actions/creator/matchesLeague';
 
 const LeagueCalendar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { matches } = useSelector(({ matchesLeague }) => matchesLeague);
+  const history = useHistory();
+  const { matches, loading } = useSelector(({ matchesLeague }) => matchesLeague);
   const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
-  const [search, setSearch] = useState('');
+  const competitions = useSelector(getCompetitionsSelector);
+
+  const prepareCompetitions = competitions.sort((a, b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
 
   useEffect(() => {
     if (location.state?.id) {
@@ -22,12 +41,34 @@ const LeagueCalendar = () => {
         ]),
       );
     }
-  }, [dateFrom, dateTo]);
+    return () => {
+      dispatch(SetFilterCompetitions(null));
+      dispatch(ClearMatchesLeague());
+    };
+  }, [dateFrom, dateTo, location.state?.id]);
+
+  useEffect(() => {
+    dispatch(fetchCompetitionsAsync());
+    return () => {
+      dispatch(ClearMatchesLeague());
+    };
+  }, []);
+
+  const handleChange = useCallback(
+    (value) => {
+      dispatch(SetFilterCompetitions(value?.id));
+      history.push({
+        pathname: routesPath.leagueCalendar,
+        state: { id: `${value?.id}` },
+      });
+    },
+    [dispatch],
+  );
 
   return (
     <>
       {location.state?.id ? (
-        <ListCalendar matches={matches} />
+        <>{loading ? 'loading' : <ListCalendar matches={matches} />}</>
       ) : (
         <Card
           sx={{
@@ -39,14 +80,14 @@ const LeagueCalendar = () => {
             justifyContent: 'space-evenly',
           }}
         >
-          <TextField
-            id="search"
-            label="Поиск соревнования"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+          <MyAutocomplete
+            getOptionLabel={(option) => `${option.name}, ${option.area.countryCode}`}
+            options={prepareCompetitions}
+            onChange={handleChange}
+            label={'Найти Чемпионат'}
           />
           <Typography variant="h5" color="initial">
-            Соревнование не выбрано
+            Выберите Чемпионат
           </Typography>
         </Card>
       )}

@@ -1,5 +1,11 @@
-import { Box, Card, CardHeader, CircularProgress, Grid, List, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CircularProgress from '@mui/material/CircularProgress';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   list: {

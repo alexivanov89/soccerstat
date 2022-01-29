@@ -1,8 +1,12 @@
-import { Dialog, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import makeStyles from '@mui/styles/makeStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetError } from '../../store/actions/creator/error';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   dialog: {

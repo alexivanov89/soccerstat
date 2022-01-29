@@ -23,6 +23,8 @@ export const teamsLeagueReducer = (state = initialState, { type, payload }) => {
       return { ...state, error: payload, loading: false };
     case teamsLeagueActions.SET_FILTER_TEAMS_LEAGUE:
       return { ...state, filter: payload };
+    case teamsLeagueActions.CLEAR_TEAMS_LEAGUE:
+      return { ...state, teamsLeague: null };
     default:
       return state;
   }

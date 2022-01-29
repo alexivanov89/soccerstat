@@ -5,9 +5,9 @@ import {
   getCompetitionsSelector,
 } from '../../store/reducers/competitionsReducer';
 import { fetchTodayMatchesAsync } from '../../store/reducers/todayMatchesReducer';
+import { SetFilterCompetitions } from '../../store/actions/creator/competitions';
 import { ListData } from '../../components/ListData';
 import { ListMatches } from '../../components/ListMatches';
-import { SetFilterCompetitions } from '../../store/actions/creator/competitions';
 import { routesPath } from '../../router/routes';
 
 const ListOfLeaguesCompetitions = () => {

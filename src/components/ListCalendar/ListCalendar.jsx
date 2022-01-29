@@ -1,6 +1,8 @@
-import { Grid, Paper, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { format } from 'date-fns';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   root: {},

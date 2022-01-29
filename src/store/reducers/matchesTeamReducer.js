@@ -20,6 +20,8 @@ export const matchesTeamReducer = (state = initialState, { type, payload }) => {
       return { ...state, matches: payload, loading: false };
     case matchesTeamActions.FETCH_MATCHES_TEAM_ERROR:
       return { ...state, error: payload, loading: false };
+    case matchesTeamActions.CLEAR_MATCHES_TEAM:
+      return { ...state, matches: null };
     default:
       return state;
   }

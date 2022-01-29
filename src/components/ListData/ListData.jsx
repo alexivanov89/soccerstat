@@ -1,22 +1,19 @@
 import { NavLink } from 'react-router-dom';
-import {
-  Autocomplete,
-  Box,
-  Card,
-  CardHeader,
-  Grid,
-  ListItem,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import Grid from '@mui/material/Grid';
+import ListItem from '@mui/material/ListItem';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import { MyAutocomplete } from '../MyAutocomplete';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -71,18 +68,11 @@ const ListData = ({ list, listOptions, handleChange, maxHeight }) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           {list.length !== 0 && (
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
+            <MyAutocomplete
               getOptionLabel={listOptions.autocompleteOptions.getOptionLabel}
               options={list}
-              sx={{ width: '100%', padding: '0px 5px' }}
-              onChange={(e, value) => {
-                handleChange(value);
-              }}
-              renderInput={(params) => (
-                <TextField {...params} label={listOptions.autocompleteOptions.label} />
-              )}
+              onChange={handleChange}
+              label={listOptions.autocompleteOptions.label}
             />
           )}
         </Grid>

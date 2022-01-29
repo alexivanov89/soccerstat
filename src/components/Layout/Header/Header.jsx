@@ -1,12 +1,15 @@
-import { styled } from '@mui/material/styles';
-import { IconButton, AppBar as MuiAppBar, Toolbar, Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { sideBarWidth } from '../../../constants/layout';
 import { CalendarsDateRangePicker } from '../../CalendarsDateRangePicker';
-import { useLocation } from 'react-router-dom';
 import { routesPath } from '../../../router/routes';
+import styled from '@mui/material/styles/styled';
 
-const AppBar = styled(MuiAppBar, {
+const MyAppBar = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
@@ -32,7 +35,7 @@ const Header = ({ open, onClick }) => {
 
   return (
     <>
-      <AppBar position="fixed" open={open}>
+      <MyAppBar position="fixed" open={open}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <div style={{ display: 'flex' }}>
             <IconButton
@@ -59,7 +62,7 @@ const Header = ({ open, onClick }) => {
             <CalendarsDateRangePicker />
           ) : null}
         </Toolbar>
-      </AppBar>
+      </MyAppBar>
     </>
   );
 };

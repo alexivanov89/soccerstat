@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Box, CssBaseline } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { sideBarWidth } from '../../constants/layout';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
 import { Header } from './Header';
 import { SideBar, SideBarHeader } from './SideBar/SideBar';
+import styled from '@mui/material/styles/styled';
+import { sideBarWidth } from '../../constants/layout';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({

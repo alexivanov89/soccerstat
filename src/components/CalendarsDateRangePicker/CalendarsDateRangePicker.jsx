@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import buildLocalizeFn from 'date-fns/locale/_lib/buildLocalizeFn';
 import { ru } from 'date-fns/locale';
-import { makeStyles } from '@mui/styles';
 import { getDateEndMonth, getDateStartMonth } from './utils';
 import { endOfDay, format, parse, startOfDay } from 'date-fns';
 import { SetDateFrom, SetDateTo } from '../../store/actions/creator/filters';
+import makeStyles from '@mui/styles/makeStyles';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const monthValues = {
   narrow: ['Я', 'Ф', 'М', 'А', 'М', 'И', 'И', 'А', 'С', 'О', 'Н', 'Д'],
