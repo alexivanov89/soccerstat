@@ -8,6 +8,8 @@ import { endOfDay, format, parse, startOfDay } from 'date-fns';
 import { SetDateFrom, SetDateTo } from '../../store/actions/creator/filters';
 import makeStyles from '@mui/styles/makeStyles';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const monthValues = {
   narrow: ['Я', 'Ф', 'М', 'А', 'М', 'И', 'И', 'А', 'С', 'О', 'Н', 'Д'],
@@ -248,26 +250,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//FIXME отправляется запрос после выбора первой даты, при обновлении страницы - фильтр периода сбрасывается.
+
 const CalendarsDateRangePicker = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
-  console.log(parse(dateFrom, 'yyyy-MM-dd', new Date()));
+  const history = useHistory();
+  const location = useLocation();
+
   const [startDate, endDate] = useMemo(() => {
     return [
-      dateFrom ? parse(dateFrom, 'yyyy-MM-dd', new Date()) : null,
-      dateTo ? parse(dateTo, 'yyyy-MM-dd', new Date()) : null,
+      dateFrom ? startOfDay(parse(dateFrom, 'yyyy-MM-dd', new Date())) : null,
+      dateTo ? endOfDay(parse(dateTo, 'yyyy-MM-dd', new Date())) : null,
     ];
   }, [dateFrom, dateTo]);
 
   const onChange = (dates) => {
     const [start, end] = dates;
-    dispatch(SetDateFrom(format(getDateStartMonth(start), 'yyyy-MM-dd')));
-    dispatch(SetDateTo(format(getDateEndMonth(end), 'yyyy-MM-dd')));
-  };
 
-  const handleDateChangeRaw = (e) => {
-    e.preventDefault();
+    const prepareDateFrom = start ? format(getDateStartMonth(start), 'yyyy-MM-dd') : null;
+    const prepareDateTo = end ? format(getDateEndMonth(end), 'yyyy-MM-dd') : null;
+    history.push({
+      pathname: location.pathname,
+      state: {
+        id: location.state.id,
+        filters: { dateFrom: prepareDateFrom, dateTo: prepareDateTo },
+      },
+    });
+    dispatch(SetDateFrom(prepareDateFrom));
+    dispatch(SetDateTo(prepareDateTo));
   };
 
   return (
@@ -281,7 +293,6 @@ const CalendarsDateRangePicker = () => {
         locale="customRu"
         dateFormat="LLLL yyyy"
         showMonthYearPicker
-        onChangeRaw={handleDateChangeRaw}
         placeholderText="Выберите фильтр календаря"
       />
     </div>

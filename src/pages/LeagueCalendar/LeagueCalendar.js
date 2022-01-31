@@ -19,7 +19,8 @@ const LeagueCalendar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { matches, loading, error } = useSelector(({ matchesLeague }) => matchesLeague);
-  const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
+  const filters = useSelector(({ filters }) => filters);
+  const { dateFrom, dateTo } = filters;
   const competitions = useSelector(getCompetitionsSelector);
 
   const prepareCompetitions = competitions.sort((a, b) => {
@@ -45,7 +46,7 @@ const LeagueCalendar = () => {
       dispatch(SetFilterCompetitions(null));
       dispatch(ClearMatchesLeague());
     };
-  }, [dateFrom, dateTo, location.state?.id]);
+  }, [filters, location.state?.id]);
 
   useEffect(() => {
     dispatch(fetchCompetitionsAsync());
