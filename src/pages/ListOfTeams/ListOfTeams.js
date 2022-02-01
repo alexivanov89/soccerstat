@@ -1,9 +1,12 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { ListData } from '../../components/ListData';
+import { MyAutocomplete } from '../../components/MyAutocomplete';
 import {
   fetchTeamsLeagueAsync,
   getTeamsLeagueSelector,
@@ -12,10 +15,9 @@ import {
   fetchCompetitionsAsync,
   getCompetitionsSelector,
 } from '../../store/reducers/competitionsReducer';
-import { MyAutocomplete } from '../../components/MyAutocomplete';
 import { SetFilterCompetitions } from '../../store/actions/creator/competitions';
-import { routesPath } from '../../router/routes';
 import { ClearTeamsLeague, SetFilterTeamsLeague } from '../../store/actions/creator/teamsLeague';
+import { routesPath } from '../../router/routes';
 
 const ListOfTeams = () => {
   const location = useLocation();
@@ -109,9 +111,21 @@ const ListOfTeams = () => {
             />
           )}
           {error && (
-            <Typography variant="h1" component="h2" color="white" align="center">
-              нет данных
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Typography variant="h1" component="h2" color="white" align="center">
+                нет данных
+              </Typography>
+              <Button onClick={history.goBack} variant="contained">
+                Вернуться назад
+              </Button>
+            </Box>
           )}
         </>
       ) : (

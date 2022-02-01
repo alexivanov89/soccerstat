@@ -9,6 +9,7 @@ export const footballService = {
       if (item.value) {
         return sum + `${item.name}=${item.value}&`;
       }
+      return null;
     }, '');
 
     return prepareFilters
@@ -20,7 +21,7 @@ export const footballService = {
       if (item.value) {
         return sum + `${item.name}=${item.value}&`;
       }
-      return sum + '';
+      return null;
     }, '');
     return prepareFilters
       ? apiClient().get(`/teams/${id}/matches?${prepareFilters}`)

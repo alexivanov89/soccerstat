@@ -1,18 +1,20 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { ListCalendar } from '../../components/ListCalendar';
 import { MyAutocomplete } from '../../components/MyAutocomplete';
 import { fetchMatchesTeamAsync } from '../../store/reducers/matchesTeamReducer';
-import { SetFilterTeamsLeague } from '../../store/actions/creator/teamsLeague';
 import {
   fetchTeamsLeagueAsync,
   getTeamsLeagueSelector,
 } from '../../store/reducers/teamsLeagueReducer';
-import { routesPath } from '../../router/routes';
+import { SetFilterTeamsLeague } from '../../store/actions/creator/teamsLeague';
 import { ClearMatchesTeam } from '../../store/actions/creator/matchesTeam';
+import { routesPath } from '../../router/routes';
 
 const TeamCalendar = () => {
   const location = useLocation();
@@ -72,9 +74,21 @@ const TeamCalendar = () => {
           {loading && 'loading'}
           {!loading && !error && <ListCalendar matches={matches} />}
           {error && (
-            <Typography variant="h1" component="h2" color="white" align="center">
-              нет данных
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Typography variant="h1" component="h2" color="white" align="center">
+                нет данных
+              </Typography>
+              <Button onClick={history.goBack} variant="contained">
+                Вернуться назад
+              </Button>
+            </Box>
           )}
         </>
       ) : (

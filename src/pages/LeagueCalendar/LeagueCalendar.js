@@ -1,18 +1,20 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { ListCalendar } from '../../components/ListCalendar';
-import { fetchMatchesLeagueAsync } from '../../store/reducers/matchesLeagueReducer';
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { ListCalendar } from '../../components/ListCalendar';
 import { MyAutocomplete } from '../../components/MyAutocomplete';
+import { fetchMatchesLeagueAsync } from '../../store/reducers/matchesLeagueReducer';
 import {
   fetchCompetitionsAsync,
   getCompetitionsSelector,
 } from '../../store/reducers/competitionsReducer';
 import { SetFilterCompetitions } from '../../store/actions/creator/competitions';
-import { routesPath } from '../../router/routes';
 import { ClearMatchesLeague } from '../../store/actions/creator/matchesLeague';
+import { routesPath } from '../../router/routes';
 
 const LeagueCalendar = () => {
   const location = useLocation();
@@ -73,9 +75,21 @@ const LeagueCalendar = () => {
           {loading && 'loading'}
           {!loading && !error && <ListCalendar matches={matches} />}
           {error && (
-            <Typography variant="h1" component="h2" color="white" align="center">
-              нет данных
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Typography variant="h1" component="h2" color="white" align="center">
+                нет данных
+              </Typography>
+              <Button onClick={history.goBack} variant="contained">
+                Вернуться назад
+              </Button>
+            </Box>
           )}
         </>
       ) : (
