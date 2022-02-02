@@ -4,7 +4,7 @@ import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-d
 import Typography from '@mui/material/Typography';
 import { ErrorModal } from '../components/ErrorModal/ErrorModal';
 import { Layout } from '../components/Layout';
-import { publicRoutes } from './routes';
+import { publicRoutes, routesPath } from './routes';
 
 export const MainRouter = () => {
   return (
@@ -27,7 +27,7 @@ export const MainRouter = () => {
                   key={route.path}
                 />
               ))}
-              <Redirect to="/home" />
+              <Redirect to={routesPath.home} />
             </Switch>
           </ErrorBoundary>
         </Layout>
