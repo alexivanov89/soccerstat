@@ -40,6 +40,7 @@ const Layout = ({ children }) => {
   const handleToggle = () => {
     setOpen(!open);
   };
+
   return (
     <Box display="flex">
       <CssBaseline />

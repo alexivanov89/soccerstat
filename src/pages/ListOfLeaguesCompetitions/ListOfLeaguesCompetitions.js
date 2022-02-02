@@ -14,6 +14,7 @@ const ListOfLeaguesCompetitions = () => {
   const dispatch = useDispatch();
   const competitions = useSelector(getCompetitionsSelector);
   const todayMatches = useSelector(({ todayMatches }) => todayMatches);
+
   const prepareCompetitions = competitions.sort((a, b) => {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {
       return -1;

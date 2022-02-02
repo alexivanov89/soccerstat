@@ -21,9 +21,9 @@ const LeagueCalendar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { matches, loading, error } = useSelector(({ matchesLeague }) => matchesLeague);
+  const competitions = useSelector(getCompetitionsSelector);
   const filters = useSelector(({ filters }) => filters);
   const { dateFrom, dateTo } = filters;
-  const competitions = useSelector(getCompetitionsSelector);
 
   const prepareCompetitions = competitions.sort((a, b) => {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {

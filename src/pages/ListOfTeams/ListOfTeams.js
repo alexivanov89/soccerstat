@@ -23,9 +23,9 @@ const ListOfTeams = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const competitions = useSelector(getCompetitionsSelector);
   const teamsLeagueSelected = useSelector(getTeamsLeagueSelector);
   const { teamsLeague, loading, error } = useSelector(({ teamsLeague }) => teamsLeague);
-  const competitions = useSelector(getCompetitionsSelector);
 
   const prepareCompetitions = competitions.sort((a, b) => {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {

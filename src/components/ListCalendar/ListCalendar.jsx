@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 
 const ListCalendar = ({ matches }) => {
   const matchdays = Array.from(new Set(matches?.matches.map(({ matchday }) => matchday)));
+
   const prepareMatches = matchdays.map((matchdayItem) => ({
     matchday: matchdayItem,
     matches: matches?.matches.filter(({ matchday }) => matchday === matchdayItem),

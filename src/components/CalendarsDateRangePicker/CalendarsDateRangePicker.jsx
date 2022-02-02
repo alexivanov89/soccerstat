@@ -250,14 +250,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//FIXME отправляется запрос после выбора первой даты, при обновлении страницы - фильтр периода сбрасывается.
+//FIXME: Отправляется запрос после выбора первой даты, при обновлении страницы - фильтр периода сбрасывается.
 
 const CalendarsDateRangePicker = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
   const history = useHistory();
   const location = useLocation();
+  const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
 
   const [startDate, endDate] = useMemo(() => {
     return [
@@ -271,13 +271,7 @@ const CalendarsDateRangePicker = () => {
 
     const prepareDateFrom = start ? format(getDateStartMonth(start), 'yyyy-MM-dd') : null;
     const prepareDateTo = end ? format(getDateEndMonth(end), 'yyyy-MM-dd') : null;
-    history.push({
-      pathname: location.pathname,
-      state: {
-        id: location.state.id,
-        filters: { dateFrom: prepareDateFrom, dateTo: prepareDateTo },
-      },
-    });
+
     dispatch(SetDateFrom(prepareDateFrom));
     dispatch(SetDateTo(prepareDateTo));
   };

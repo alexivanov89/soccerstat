@@ -20,9 +20,9 @@ const TeamCalendar = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { matches, loading, error } = useSelector(({ matchesTeam }) => matchesTeam);
-  const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
   const teamsLeagueSelected = useSelector(getTeamsLeagueSelector);
+  const { dateFrom, dateTo } = useSelector(({ filters }) => filters);
+  const { matches, loading, error } = useSelector(({ matchesTeam }) => matchesTeam);
 
   const prepareTeamsLeague = teamsLeagueSelected.sort((a, b) => {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {
